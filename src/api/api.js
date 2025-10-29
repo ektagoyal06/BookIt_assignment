@@ -1,7 +1,5 @@
-
-import axios from 'axios';
-
+import axios from "axios";
 
 export const API = axios.create({
-baseURL: 'http://localhost:5173', // Change when deploying
+  baseURL: import.meta.env.VITE_API_BASE_URL, // ✅ uses the .env value
 });

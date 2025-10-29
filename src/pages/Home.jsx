@@ -11,8 +11,6 @@ const Home = () => {
       const res = await fetch(
         `${import.meta.env.VITE_BACKEND_URL}/api/experiences?q=${encodeURIComponent(query)}`
       );
-
-
       const data = await res.json();
       setExperiences(data);
     } catch (err) {
