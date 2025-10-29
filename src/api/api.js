@@ -1,16 +1,16 @@
-const API_BASE_URL =
-  import.meta.env.VITE_API_URL ||
-  window.location.origin; // fallback for vercel frontend
+import axios from "axios";
 
-export const fetchExperiences = async (query = "") => {
+// Use the backend URL from .env
+const API = axios.create({
+  baseURL: import.meta.env.VITE_API_URL, 
+});
+
+export const getExperiences = async (query = "") => {
   try {
-    const response = await fetch(`${API_BASE_URL}/api/experiences?q=${query}`);
-    if (!response.ok) {
-      throw new Error("Failed to fetch experiences");
-    }
-    return await response.json();
+    const response = await API.get(`/api/experiences?q=${query}`);
+    return response.data;
   } catch (error) {
     console.error("Error fetching experiences:", error);
-    return [];
+    throw error;
   }
 };
