@@ -9,8 +9,10 @@ const Home = () => {
   const fetchExperiences = async (query = "") => {
     try {
       const res = await fetch(
-        `http://localhost:5000/api/experiences?q=${encodeURIComponent(query)}`
+        `${import.meta.env.VITE_BACKEND_URL}/api/experiences?q=${encodeURIComponent(query)}`
       );
+
+
       const data = await res.json();
       setExperiences(data);
     } catch (err) {
@@ -32,13 +34,13 @@ const Home = () => {
       <div className="flex justify-between items-center mb-8">
         {/* <h1 className="text-2xl font-semibold">Explore Experiences</h1> */}
         <div className="flex items-center gap-2 ml-20">
-            <img
-              src="/logo.png"
-              alt="Highway Delite Logo"
-              className="h-12 w-35 "
-            />
-            {/* <span className="font-semibold text-lg">highway delite</span> */}
-          </div>
+          <img
+            src="/logo.png"
+            alt="Highway Delite Logo"
+            className="h-12 w-35 "
+          />
+          {/* <span className="font-semibold text-lg">highway delite</span> */}
+        </div>
 
         <div className="flex items-center space-x-4">
           {/* ✅ Search form */}

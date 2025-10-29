@@ -12,6 +12,9 @@ export default function AddExperience() {
   const [dateInput, setDateInput] = useState("");
   const [timeInput, setTimeInput] = useState("");
 
+  // ✅ Get base URL from environment variable
+  const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
   const handleAddDate = () => {
     if (dateInput && !availableDates.includes(dateInput)) {
       setAvailableDates([...availableDates, dateInput]);
@@ -53,7 +56,9 @@ export default function AddExperience() {
     };
 
     try {
-      await axios.post("http://localhost:5000/api/experiences", newExperience);
+      // ✅ Use environment variable instead of hardcoded localhost
+      await axios.post(`${BASE_URL}/api/experiences`, newExperience);
+
       alert("✅ Experience added successfully!");
       // Reset form
       setTitle("");
@@ -64,8 +69,8 @@ export default function AddExperience() {
       setAvailableDates([]);
       setAvailableTimeSlots([]);
     } catch (error) {
-      console.error("Error adding experience:", error);
-      alert("❌ Failed to add experience. Please check your backend.");
+      console.error("❌ Error adding experience:", error);
+      alert("❌ Failed to add experience. Please check your backend connection.");
     }
   };
 
@@ -119,7 +124,7 @@ export default function AddExperience() {
           onChange={(e) => setImage(e.target.value)}
         />
 
-        {/* ✅ Add Available Dates */}
+        {/* ✅ Available Dates */}
         <div>
           <label className="block font-medium text-gray-700 mb-1">
             Available Dates
@@ -158,7 +163,7 @@ export default function AddExperience() {
           </div>
         </div>
 
-        {/* ✅ Add Available Time Slots */}
+        {/* ✅ Available Time Slots */}
         <div>
           <label className="block font-medium text-gray-700 mb-1">
             Available Time Slots

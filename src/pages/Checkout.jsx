@@ -25,7 +25,7 @@ export default function Checkout() {
     }
 
     try {
-      await axios.post("http://localhost:5000/api/bookings", {
+      await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/bookings`, {
         name: fullName,
         email,
         experience: exp?.title,
@@ -34,6 +34,7 @@ export default function Checkout() {
         quantity,
         total,
       });
+
 
       navigate("/booking-success", {
         state: { exp, quantity, total, selectedDate, selectedTime },

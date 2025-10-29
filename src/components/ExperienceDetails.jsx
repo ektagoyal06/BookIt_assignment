@@ -14,13 +14,14 @@ export default function ExperienceDetails() {
   useEffect(() => {
     const fetchExp = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/experiences/${id}`);
+        const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/experiences/${id}`);
         const data = await res.json();
         setExp(data);
       } catch (error) {
         console.error("Failed to fetch experience:", error);
       }
     };
+
     fetchExp();
   }, [id]);
 
@@ -119,11 +120,10 @@ export default function ExperienceDetails() {
                   <button
                     key={i}
                     onClick={() => setSelectedDate(d)}
-                    className={`px-3 py-1 rounded border transition ${
-                      selectedDate === d
+                    className={`px-3 py-1 rounded border transition ${selectedDate === d
                         ? "bg-yellow-400 text-black border-yellow-500"
                         : "hover:bg-gray-100 text-gray-700"
-                    }`}
+                      }`}
                   >
                     {d}
                   </button>
@@ -139,11 +139,10 @@ export default function ExperienceDetails() {
                   <button
                     key={i}
                     onClick={() => setSelectedTime(t)}
-                    className={`px-3 py-1 rounded border text-sm transition ${
-                      selectedTime === t
+                    className={`px-3 py-1 rounded border text-sm transition ${selectedTime === t
                         ? "bg-yellow-400 text-black border-yellow-500"
                         : "hover:bg-gray-100 text-gray-700"
-                    }`}
+                      }`}
                   >
                     {t}
                   </button>
@@ -211,11 +210,10 @@ export default function ExperienceDetails() {
           <button
             onClick={handleConfirm}
             disabled={!selectedDate || !selectedTime}
-            className={`w-full py-2 rounded font-medium transition ${
-              selectedDate && selectedTime
+            className={`w-full py-2 rounded font-medium transition ${selectedDate && selectedTime
                 ? "bg-yellow-500 text-black hover:bg-yellow-600"
                 : "bg-gray-200 text-gray-500 cursor-not-allowed"
-            }`}
+              }`}
           >
             Confirm
           </button>
