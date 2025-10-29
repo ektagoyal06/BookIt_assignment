@@ -4,10 +4,6 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-<<<<<<< HEAD
-=======
-    "start": "node server.js",
->>>>>>> 35b264c (updated home.jsx)
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
