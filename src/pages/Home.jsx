@@ -6,15 +6,28 @@ const Home = () => {
   const [experiences, setExperiences] = useState([]);
   const [search, setSearch] = useState("");
 
+  // ✅ Automatically pick backend URL (Vercel / Local)
+  const API_BASE =
+    import.meta.env.VITE_BACKEND_URL ||
+    window.location.origin.replace(/\/$/, ""); // fallback for same-domain deploys
+
   const fetchExperiences = async (query = "") => {
     try {
       const res = await fetch(
-        `${import.meta.env.VITE_BACKEND_URL}/api/experiences?q=${encodeURIComponent(query)}`
+        `${API_BASE}/api/experiences?q=${encodeURIComponent(query)}`
       );
+
+      // ✅ Ensure response is JSON (not HTML)
+      const contentType = res.headers.get("content-type");
+      if (!contentType || !contentType.includes("application/json")) {
+        throw new Error("Invalid JSON response from server");
+      }
+
       const data = await res.json();
       setExperiences(data);
     } catch (err) {
-      console.error("Error fetching experiences:", err);
+      console.error("❌ Error fetching experiences:", err);
+      setExperiences([]); // avoid crash
     }
   };
 
@@ -23,21 +36,15 @@ const Home = () => {
   }, []);
 
   const handleSearch = (e) => {
-    e.preventDefault(); // ✅ Prevent full page reload
+    e.preventDefault();
     fetchExperiences(search.trim());
   };
 
   return (
     <div className="px-10 py-6">
       <div className="flex justify-between items-center mb-8">
-        {/* <h1 className="text-2xl font-semibold">Explore Experiences</h1> */}
         <div className="flex items-center gap-2 ml-20">
-          <img
-            src="/logo.png"
-            alt="Highway Delite Logo"
-            className="h-12 w-35 "
-          />
-          {/* <span className="font-semibold text-lg">highway delite</span> */}
+          <img src="/logo.png" alt="Highway Delite Logo" className="h-12 w-35" />
         </div>
 
         <div className="flex items-center space-x-4">

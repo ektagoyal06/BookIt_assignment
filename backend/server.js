@@ -11,8 +11,27 @@ dotenv.config();
 const app = express();
 
 // ✅ Middleware
-app.use(cors());
 app.use(express.json());
+
+// ✅ CORS — allow your Vercel frontend
+const allowedOrigins = [
+  "https://book-it-assignment-topaz.vercel.app", // your Vercel frontend URL
+  "http://localhost:5173", // for local testing
+];
+
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    methods: ["GET", "POST"],
+    credentials: true,
+  })
+);
 
 // ✅ Connect to MongoDB
 mongoose
@@ -98,15 +117,14 @@ app.post("/api/bookings", async (req, res) => {
 });
 
 /* ==============================
-   ✅ Serve Frontend (for deployment)
+   ✅ Root Route
 ================================= */
 app.get("/", (req, res) => {
   res.send("✅ BookIt Backend running successfully!");
 });
 
-
 /* ==============================
-   ✅ SERVER LISTEN
+   ✅ Server Listen
 ================================= */
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
