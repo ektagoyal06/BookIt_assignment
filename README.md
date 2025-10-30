@@ -1,16 +1,41 @@
-# React + Vite
+Live Demo Link:https://book-it-assignment-topaz.vercel.app/)
+BookIt: Experiences & Slots
+BookIt is a fullstack travel experience booking platform that allows users to explore curated travel experiences, view available slots, and make bookings — complete with search, slot selection, and confirmation flow.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Objective
+This project was built as part of the Fullstack Intern Assignment to demonstrate skills in:
+Fullstack development (React + Node.js)
+RESTful API integration
+Database-driven dynamic content
+Responsive and clean UI design
+End-to-end deployment (Render + Vercel)
 
-Currently, two official plugins are available:
+Features
+🔹 Frontend (React + TailwindCSS)
+Responsive, mobile-friendly layout.
+Clean, Figma-matched UI with consistent spacing & typography.
+Experience listing with search functionality.
+Dynamic details and booking pages.
+Smooth user feedback: loading, success, failure, sold-out states.
+Environment-based API configuration for local and production builds.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+🔹 Backend (Node.js + Express + MongoDB)
+GET /api/experiences — Fetch all experiences or search by keyword.
+GET /api/experiences/:id — Fetch experience details and slot availability.
+POST /api/bookings — Store booking details with validation.
+POST /api/promo/validate — Validate promo codes (e.g. SAVE10, FLAT100).
 
-## React Compiler
+Tech Stack:
+Frontend
+React (Vite)
+TailwindCSS
+React Router
+Axios / Fetch API
+Vercel Deployment- Link: book-it-assignment-topaz.vercel.app
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Backend
+Node.js + Express
+MongoDB + Mongoose
+Render Deployment- Link: https://bookit-assignment.onrender.com
+MongoDB integration with Mongoose schema models.
+CORS enabled and optimized for frontend API calls.
